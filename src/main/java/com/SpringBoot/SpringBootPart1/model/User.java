@@ -5,13 +5,13 @@ public class User {
 
     @Id
     public int userId;
-    public String userName;
+    public static String userName;
     public String userSurname;
 
 
     public User(int userId, String userName, String userSurname) {
         this.userId = userId;
-        this.userName = userName;
+        User.userName = userName;
         this.userSurname = userSurname;
     }
 
@@ -26,7 +26,7 @@ public class User {
         return userId;
     }
 
-    public  String getUserName() {
+    public static String getUserName() {
 
         return userName;
     }

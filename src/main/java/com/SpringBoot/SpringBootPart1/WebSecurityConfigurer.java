@@ -7,11 +7,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
-    // TODO: Read more about this extension WebSecurityConfigurerAdapter
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // COMPLETE CODE HERE
+
+        //enable in memory based authentication with a user named "sleepy" and "Shakir"
+        auth.inMemoryAuthentication().withUser("sleepy").password("head").roles("USER")
+                .and().withUser("Shakir").password("work").roles("USER", "ADMIN");
     }
 
     @Override

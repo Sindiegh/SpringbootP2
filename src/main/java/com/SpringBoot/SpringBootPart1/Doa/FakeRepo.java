@@ -20,41 +20,21 @@ public  class FakeRepo implements FakeRepoInterface{
     public String findUserById(int userId) {
         for (User userArray: usr ) {
             if (userArray.getUserId() == userId){
-                return userArray.getUserName() + "";
+                return "Hi there "+ User.getUserName()  ;
             }
         }
-        try
-        {
-            System.out.println("Going to sleep for 5 Secs.. to simulate backend call.");
-            Thread.sleep(1000*5);
-        }
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
+
 
         return null;
     }
 
     @Override
     public String deleteUser(int userId) {
-        for (User userArray : usr) {
-            if (userArray.getUserId() == userId){
-                usr.remove(userId);
-                return userId + " removed";
-            }
-        }
-        return null;
+        User user = new User(userId,"","");
+        usr.remove(user);
+        return "User removed";
+
     }
 
-    @Override
-    public String User(int userId) {
-        for (User userArray : usr) {
-            if (userArray.getUserId() == userId){
-                usr.remove(userId);
-                return "Hello " + userId;
-            }
-        }
-        return null;
-    }
+
 }

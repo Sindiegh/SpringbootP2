@@ -1,12 +1,22 @@
 package com.SpringBoot.SpringBootPart1;
 
 import com.SpringBoot.SpringBootPart1.Doa.FakeRepo;
-import com.SpringBoot.SpringBootPart1.service.UserServiceImplementation;
+import com.SpringBoot.SpringBootPart1.model.User;
+import com.SpringBoot.SpringBootPart1.service.UserService;
+import org.hamcrest.Matcher;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 @SpringBootTest
 class SpringBootPart1ApplicationTests {
@@ -15,29 +25,114 @@ class SpringBootPart1ApplicationTests {
 	void contextLoads() {
 	}
 
-	UserServiceImplementation userService = new UserServiceImplementation(new FakeRepo());
-
 	@Test
-	public void insertUserTest() throws NoSuchMethodException {
-		userService.insertUser(1,"Sindiswa", "Khama");
-	}
-	@Test
-	public void deleteUserTest(){
-		userService.deleteUser(1);
-
-
-
-	}
-	@Test
-	public void getUserTest() throws NoSuchMethodException {
-		userService.findUserById(2);
-
+	public void insertUserTest()  {
+		assertThat(Boolean.parseBoolean(String.valueOf(new FakeRepo().insertUser(1,"",""))));
 
 	}
 
-	@Autowired
-	private TestRestTemplate template;
+	@Test
+	public void findUserByIdTest()  {
+		assertThat(Boolean.parseBoolean(String.valueOf(new FakeRepo().findUserById(1))));
 
-	TestRestTemplate response = template.withBasicAuth("Sindiegh","hiThere");
+		}
+
+	@Test
+	public void deleteUserTest()  {
+		assertThat(Boolean.parseBoolean(String.valueOf(new FakeRepo().deleteUser(1))));
+
+	}
+	@Test
+	public void userServiceImplTest() throws InterruptedException {
+		assertThat(Boolean.parseBoolean(String.valueOf(new UserService() {
+			@Override
+			public String addUser(int userId, String userName, String userSurname) throws NoSuchMethodException {
+				return null;
+			}
+
+			@Override
+			public String getUserById(int userId) throws InterruptedException {
+				System.out.println("Going to sleep for 5 Secs.. to simulate backend call.");
+				Thread.sleep(1000*5);
+				return null;
+			}
+
+			@Override
+			public String removeUser(int userId) {
+				return null;
+			}
+		}.getUserById(1))));
+
+
+		assertThat(Boolean.parseBoolean(String.valueOf(new UserService() {
+			@Override
+			public String addUser(int userId, String userName, String userSurname) throws NoSuchMethodException {
+				return null;
+			}
+
+			@Override
+			public String getUserById(int userId) throws InterruptedException {
+				System.out.println("Going to sleep for 5 Secs.. to simulate backend call.");
+				Thread.sleep(1000*5);
+				return null;
+			}
+
+			@Override
+			public String removeUser(int userId) {
+				return null;
+			}
+		}.getUserById(1))));
+
+
+
+		assertThat(Boolean.parseBoolean(String.valueOf(new UserService() {
+			@Override
+			public String addUser(int userId, String userName, String userSurname) throws NoSuchMethodException {
+				return null;
+			}
+
+			@Override
+			public String getUserById(int userId) throws InterruptedException {
+				System.out.println("Going to sleep for 5 Secs.. to simulate backend call.");
+				Thread.sleep(1000*5);
+				return null;
+			}
+
+			@Override
+			public String removeUser(int userId) {
+				return null;
+			}
+		}.getUserById(1))));
+
+
+		assertThat(Boolean.parseBoolean(String.valueOf(new UserService() {
+			@Override
+			public String addUser(int userId, String userName, String userSurname) throws NoSuchMethodException {
+				return null;
+			}
+
+			@Override
+			public String getUserById(int userId) throws InterruptedException {
+				System.out.println("Going to sleep for 5 Secs.. to simulate backend call.");
+				Thread.sleep(1000*5);
+				return null;
+			}
+
+			@Override
+			public String removeUser(int userId) {
+				return null;
+			}
+		}.getUserById(1))));
+	}
+
+
+
+	@Test
+	public void webSecurityConfigurerTest(){
+		assertThat(Boolean.parseBoolean(String.valueOf(new WebSecurityConfigurer())));
+	}
+
+
+
 
 }
