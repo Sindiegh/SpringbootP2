@@ -15,20 +15,19 @@ class Application {
 	public static void main(String[] args) {
 
 
-		Scanner input = new Scanner(System.in);
+
 		SpringApplication application = new SpringApplication(Application.class);
 		application.setDefaultProperties(Collections.singletonMap("server.port", "8888"));
-		//application.run(args);
+		application.run(args);
 		try {
 			FakeRepo fakeRepo = new FakeRepo();
-			System.out.println(fakeRepo.insertUser(1, "Sindi", "K"));
-			System.out.println(fakeRepo.findUserById(1));
-			System.out.println(fakeRepo.deleteUser( 1));
+
 			UserServiceImplementation userServiceImplementation = new UserServiceImplementation(fakeRepo);
 			System.out.println(userServiceImplementation.addUser(54,"Til","Slip"));
-			System.out.println(userServiceImplementation.getUserById(54));
 			System.out.println(userServiceImplementation.removeUser(54));
+			System.out.println(userServiceImplementation.getUserById(54));
 
+			System.out.println(new WebSecurityConfigurer());
 
 		}
 		catch (IndexOutOfBoundsException | NoSuchMethodException iobe)

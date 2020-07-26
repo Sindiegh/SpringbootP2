@@ -1,8 +1,6 @@
 package com.SpringBoot.SpringBootPart1.service;
 
 import com.SpringBoot.SpringBootPart1.Doa.FakeRepo;
-import com.SpringBoot.SpringBootPart1.Doa.FakeRepoInterface;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -10,16 +8,17 @@ import org.springframework.stereotype.Service;
 public class UserServiceImplementation implements UserService {
 
 
-    @Autowired
-    FakeRepoInterface fakeRepoInterface ;
 
-    public UserServiceImplementation(FakeRepoInterface repo) {
-        this.fakeRepoInterface=repo;
+   final FakeRepo fakeRepo ;
+
+    public UserServiceImplementation(FakeRepo fakeRepo) {
+        this.fakeRepo = fakeRepo;
     }
+
 
     @Override
     public String addUser(int userId, String userName, String userSurname) throws NoSuchMethodException {
-        return fakeRepoInterface.insertUser(userId,userName,userSurname);
+        return fakeRepo.insertUser(userId,userName,userSurname);
     }
 
     @Override
@@ -36,11 +35,11 @@ public class UserServiceImplementation implements UserService {
         }
 
 
-        return fakeRepoInterface.findUserById(userId);
+        return fakeRepo.findUserById(userId);
     }
 
     @Override
     public String removeUser(int userId) {
-        return fakeRepoInterface.deleteUser(userId);
+        return fakeRepo.deleteUser(userId);
     }
     }
